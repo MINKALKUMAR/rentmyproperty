@@ -132,7 +132,7 @@ const Navbar = () => {
               </div>
 
               <button
-                onClick={() => (window.location.href = "https://rentmyproperty-admin.onrender.com")}
+                onClick={() => (window.location.href = "https://rentmyproperty-1.onrender.com/")}
                 className="relative bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-medium px-5 py-2.5 rounded-lg shadow transition-all duration-300 overflow-hidden group"
               >
                 <span className="relative z-10">Admin Login</span>
