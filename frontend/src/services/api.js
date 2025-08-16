@@ -1,7 +1,7 @@
 // api.js
 import axios from 'axios';
 
-const API_URL = 'https://rentmyproperty-backend.onrender.com';
+const API_URL = 'https://rentmyproperty.onrender.com';
 
 const api = axios.create({
   baseURL: API_URL,
