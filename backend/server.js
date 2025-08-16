@@ -8,7 +8,8 @@ require('dotenv').config();
 // Connect to database
 connectDB();
 const allowedOrigins = [
-  'https://rentmyproperty-frontent.onrender.com'
+  'https://rentmyproperty-frontend.onrender.com',  // Fixed typo
+  'https://rentmyproperty.onrender.com'           // Add your other frontend URL
 ];
 app.use(cors({
   origin: allowedOrigins,
