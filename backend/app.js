@@ -19,8 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Mount routers
-app.use('/api/v1/properties', properties);
-app.use('/api/v1/filters', filters);
+app.use('/properties', properties);
+app.use('/filters', filters);
 
 // Error handling middleware (must be after routes)
 app.use(errorHandler);
