@@ -1,7 +1,7 @@
 // src/api.js
 import axios from 'axios';
 
-const API_URL = 'https://rentmyproperty.onrender.com'; // Update with your backend URL
+const API_URL = 'https://rentmyproperty-backend.onrender.com'; // Update with your backend URL
 
 // Create axios instance
 const api = axios.create({
