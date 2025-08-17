@@ -5,6 +5,10 @@ const connectDB = require('./config/db');
 // Load env vars
 require('dotenv').config();
 
+//I am using for Railway 
+app.use('/api/properties', propertyRoutes);
+app.use('/api/filters', filterRoutes);
+
 // Connect to database
 connectDB();
 const allowedOrigins = [
