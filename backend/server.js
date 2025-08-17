@@ -6,8 +6,8 @@ const connectDB = require('./config/db');
 require('dotenv').config();
 
 //I am using for Railway 
-app.use('/api/properties', propertyRoutes);
-app.use('/api/filters', filterRoutes);
+//app.use('/api/properties', propertyRoutes);
+//app.use('/api/filters', filterRoutes);
 
 // Connect to database
 connectDB();
