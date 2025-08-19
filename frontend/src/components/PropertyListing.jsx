@@ -380,6 +380,7 @@ const FilterSection = ({
   locations,
   propertyTypes,
   occupancyTypes,
+  onResetFilters // Add this prop
 }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -396,9 +397,9 @@ const FilterSection = ({
         Find Your Perfect Property
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-4">
         {/* Search by PID */}
-        <div className="md:col-span-3">
+        <div className="md:col-span-2 lg:col-span-2">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FaSearch className="text-gray-400" />
@@ -519,11 +520,34 @@ const FilterSection = ({
             className="w-full py-3 px-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
           />
         </div>
+
+        {/* Reset Filters Button */}
+        <div className="md:col-span-1">
+          <button
+            onClick={onResetFilters}
+            className="w-full py-3 px-4 bg-gradient-to-r from-red-300 to-red-400 hover:from-red-500 hover:to-red-600 text-white rounded-xl transition-all duration-300 font-medium shadow-md hover:shadow-lg flex items-center justify-center"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5 mr-2" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" 
+              />
+            </svg>
+            Reset Filters
+          </button>
+        </div>
       </div>
     </div>
   );
 };
-
 const PropertyListings = () => {
   const [filters, setFilters] = useState({
     location: "",
@@ -803,6 +827,7 @@ const PropertyListings = () => {
           filters={filters}
           onFilterChange={handleFilterChange}
           onSearch={handleSearch}
+           onResetFilters={resetFilters} // Add this line
           locations={locations}
           propertyTypes={propertyTypes}
           occupancyTypes={occupancyTypes}
