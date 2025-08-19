@@ -21,8 +21,8 @@ router.get('/', getProperties);
 router.get('/:id', getProperties);
 
 // Protected routes
-router.post('/', protect, upload.array('images', 10), createProperty);
-router.put('/:id', protect, upload.array('images', 10), updateProperty);
+router.post('/', protect, upload.array('images', 25), createProperty);
+router.put('/:id', protect, upload.array('images', 25), updateProperty);
 router.delete('/:id', protect, deleteProperty);
 
 module.exports = router;
