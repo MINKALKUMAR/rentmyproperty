@@ -8,7 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Properties() {
   const [properties, setProperties] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
   const { user } = useAuth();
 
   useEffect(() => {
@@ -17,6 +19,7 @@ export default function Properties() {
         const response = await getProperties();
         if (response && response.success) {
           setProperties(response.data);
+          setFilteredProperties(response.data);
         }
       } catch (error) {
         console.error("Error fetching properties:", error);
@@ -27,6 +30,14 @@ export default function Properties() {
 
     fetchProperties();
   }, []);
+
+  // Filter properties based on search term
+  useEffect(() => {
+    const filtered = properties.filter(property =>
+      property.pid.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProperties(filtered);
+  }, [searchTerm, properties]);
 
   const handleDelete = async (id) => {
     const toastId = toast.info(
@@ -88,11 +99,40 @@ export default function Properties() {
         </Link>
       </div>
 
-      {properties.length === 0 ? (
+      {/* Search Bar */}
+      <div className="mb-6">
+        <div className="relative max-w-md">
+          <input
+            type="text"
+            placeholder="Search by PID..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm("")}
+              className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+      </div>
+
+      {filteredProperties.length === 0 ? (
         <div className="bg-white shadow-xl rounded-xl p-8 text-center">
           <p className="text-xl text-gray-600">
-            No properties found. Add your first property!
+            {searchTerm ? "No properties match your search" : "No properties found. Add your first property!"}
           </p>
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm("")}
+              className="mt-4 text-blue-600 hover:text-blue-800 text-lg"
+            >
+              Clear search
+            </button>
+          )}
         </div>
       ) : (
         <div className="bg-white shadow-xl rounded-xl overflow-hidden">
@@ -121,7 +161,7 @@ export default function Properties() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {properties.map((property) => (
+                {filteredProperties.map((property) => (
                   <tr key={property._id}>
                     <td className="px-6 py-4 whitespace-nowrap text-lg font-medium text-gray-900">
                       {property.pid}
